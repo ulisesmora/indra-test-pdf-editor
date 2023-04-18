@@ -1,0 +1,15 @@
+<div class="modal">
+    <h1>Add Image </h1>
+    <form class="modal" [formGroup]="imageForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Search image in the web </mat-label>
+        <input matInput formControlName="image" placeholder="Placeholder">
+        <mat-icon matSuffix>image</mat-icon>
+      </mat-form-field>
+      <div *ngIf="renderImage">
+    <img style="width: 200px;" src={{imageForm.value.image}} > 
+</div>
+    <button (click)="validateImage()" [disabled]="!imageForm.valid" mat-raised-button>Preview Image</button>
+    <button style="margin-top: 1rem;" (click)="AddImage()" [disabled]="!imageForm.valid" mat-raised-button>Add Image</button>
+    </form>
+</div>

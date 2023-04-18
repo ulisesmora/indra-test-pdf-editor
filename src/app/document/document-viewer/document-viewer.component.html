@@ -1,0 +1,85 @@
+<div *ngIf="pdfSrc !== 'undefined'">
+<div
+  (click)="SelectedOrRemoveElement($event)"
+  style="width: 100%; position: absolute; background-color: transparent"
+  class="editLayer"
+  [ngStyle]="{ height: heightDocument + 'px' }"
+  *ngIf="images.length > 0 || texts.length > 0"
+>
+  <div
+    *ngFor="let item of images; let i = index"
+    style="position: absolute; z-index: 99"
+    [ngStyle]="{ left: item.posx + 'px', top: item.posy + 'px' }"
+  >
+    <img
+      [attr.id]="i"
+      src="{{ item.content }}"
+      [ngClass]="{ selected: item.selected }"
+      style="width: 70px; height: 70px"
+    />
+  </div>
+  <div
+    *ngFor="let item of draws"
+    style="position: absolute; z-index: 99"
+    [ngStyle]="{ left: '0' + 'px', top: item.posy + 'px' }"
+  >
+    <ng-opendraw
+      [canHeight]="800"
+      [canWidth]="widthDocument"
+      [lineWidth]="2"
+      [lineColor]="getColor()"
+      [fillShape]="false"
+      [eraser]="false"
+    ></ng-opendraw>
+  </div>
+  <div
+    *ngFor="let item of texts; let j = index"
+    style="position: absolute; z-index: 99"
+    [ngStyle]="{
+      left: item.posx + 'px',
+      top: item.posy + 'px',
+      'background-color': 'yellow',
+      opacity: '0.5'
+    }"
+  >
+    <mat-form-field
+      [ngClass]="{ selected: item.selected }"
+      appearance="legacy"
+      [attr.id]="'mat-input-' + j"
+      style="z-index: 99"
+    >
+      <mat-label></mat-label>
+      <textarea
+        name="key_{{ j }}"
+        matInput
+        placeholder="Insert text..."
+      ></textarea>
+    </mat-form-field>
+  </div>
+</div>
+
+<app-document-editor
+  *ngIf="heightDocument > 0"
+  (zoomReaction)="Zoom($event)"
+  (rotationReaction)="Rotation($event)"
+  (imageReaction)="getImage($event)"
+  (saveDocumentReaction)="printAddElements()"
+  (optionDocumentReaction)="getActualOption($event)"
+></app-document-editor>
+
+<pdf-viewer
+  (click)="GetClick($event)"
+  (mouseup)="DragElement($event)"
+  [src]="pdfSrc"
+  [render-text]="true"
+  [page]="1"
+  [rotation]="rotation"
+  (after-load-complete)="getDimensionOfContainers()"
+  [original-size]="true"
+  [zoom]="zoom"
+  [ngStyle]="{ width: '100' + '%', height: heightDocument + 'px' }"
+></pdf-viewer>
+</div>
+<div>
+  <p>Id not found</p>
+</div>

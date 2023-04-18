@@ -1,0 +1,68 @@
+
+<div  class="tools">
+    <button
+      (click)="Rotation()"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">rotate_left</mat-icon>
+    </button>
+    <button
+      (click)="Zoom(true)"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">zoom_in</mat-icon>
+    </button>
+    <button
+      (click)="Zoom(false)"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">zoom_out</mat-icon>
+    </button>
+  
+    <button
+      (click)="openDialog()"
+      [ngClass]="{ green: options == 'IMAGE' }"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">add_photo_alternate</mat-icon>
+    </button>
+  
+    <button
+      (click)="ChangeEdit(2)"
+      [ngClass]="{ green: options == 'TEXT' }"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">text_increase</mat-icon>
+    </button>
+  
+    <button
+      (click)="ChangeEdit(5)"
+      [ngClass]="{ green: options == 'EDIT' }"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">touch_app</mat-icon>
+    </button>
+  
+    <button
+      (click)="ChangeEdit(4)"
+      [ngClass]="{ green: options == 'REMOVE' }"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">delete</mat-icon>
+    </button>
+  
+    <button
+      (click)="printAddElements()"
+      mat-icon-button
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon style="width: 10px">save</mat-icon>
+    </button>
+  </div>
