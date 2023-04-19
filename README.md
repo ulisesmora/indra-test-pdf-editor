@@ -12,6 +12,13 @@ src/
 
 ## Try use SOLID in the project 
 
+## IMPORTANT NOTE
+
+Use scroll to render pdf document. 
+
+<img width="1427" alt="Captura de pantalla 2023-04-19 a la(s) 10 21 35" src="https://user-images.githubusercontent.com/33990181/233123401-0f45348f-d920-46f6-b921-29f72d6307c8.png">
+
+<img width="1434" alt="Captura de pantalla 2023-04-19 a la(s) 10 21 07" src="https://user-images.githubusercontent.com/33990181/233123426-67108d04-3e92-443d-ae25-409e26f368ab.png">
 
 ## known issues and solutions
 
