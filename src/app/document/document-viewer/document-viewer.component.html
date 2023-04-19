@@ -52,6 +52,8 @@
       <textarea
         name="key_{{ j }}"
         matInput
+        [value]="item.content"
+        [attr.id]="'text-area-'+j"
         placeholder="Insert text..."
       ></textarea>
     </mat-form-field>
@@ -80,6 +82,6 @@
   [ngStyle]="{ width: '100' + '%', height: heightDocument + 'px' }"
 ></pdf-viewer>
 </div>
-<div>
+<div *ngIf="pdfSrc == 'undefined'" >
   <p>Id not found</p>
 </div>

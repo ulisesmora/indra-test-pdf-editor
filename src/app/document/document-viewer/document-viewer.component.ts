@@ -21,6 +21,7 @@ export class DocumentViewerComponent implements OnInit {
   public widthDocument: number = 0;
   public heightDocument: number = 0;
   public zoom: number = 1.0;
+  public actualText: string = "";
   public selectedElement: selectedElement = { id: -1, type: '' };
   public image: string =
     'https://www.sdpnoticias.com/resizer/dY70OJk-HGPfPj0QGOfZLkevLOc=/arc-photo-sdpnoticias/arc2-prod/public/RSRLW77EDJBUHEGMQUQWLY3HFI.jpeg';
@@ -50,7 +51,8 @@ export class DocumentViewerComponent implements OnInit {
       if (e.nodeName === 'TEXTAREA') {
         const ids = e.name;
         const id = ids.split('key_');
-        if (Number.parseInt(id[1]) >= 0 && Number.parseInt(id[1]) <= this.images.length) {
+        this.actualText = e.value;
+        if (Number.parseInt(id[1]) >= 0 ) {
           this.selectedElement = { id: Number.parseInt(id[1]), type: 'TEXT' };
           this.texts[this.selectedElement.id] = {
             ...this.texts[this.selectedElement.id],
@@ -80,6 +82,7 @@ export class DocumentViewerComponent implements OnInit {
         posy: event.pageY.toString(),
         zoomAded: this.zoom,
         selected: false,
+        factorZoom: event.pageY * 0.5 
       };
       if (this.options === 'IMAGE') {
         this.images.push(image);
@@ -99,6 +102,7 @@ export class DocumentViewerComponent implements OnInit {
         this.texts[this.selectedElement.id] = {
           ...this.texts[this.selectedElement.id],
           selected: false,
+          content:this.actualText,
           posx: event.pageX.toString(),
           posy: event.pageY.toString(),
         };
@@ -123,6 +127,7 @@ export class DocumentViewerComponent implements OnInit {
   Zoom(event: number) {
     this.zoom = event;
     this.getDimensionOfContainers();
+    
   }
 
   Rotation(rotation: number) {
@@ -134,13 +139,21 @@ export class DocumentViewerComponent implements OnInit {
     return 'black';
   }
 
-  ResizeAddedElements() {}
+  ResizeAddedElements() {
+   
+    for(let i = 0; i < this.images.length; i++){
+     // this.images[i].posx = this.images[i].zoomAded <= this.zoom ?  (Number.parseInt(this.images[i].posx) + this.images[i].factorZoom).toString() : (Number.parseInt(this.images[i].posx) / this.zoom).toString();
+    //  this.images[i].posy = this.images[i].zoomAded <= this.zoom ?  (Number.parseInt(this.images[i].posy) + Number.parseInt(this.images[i].posy) * 0.4).toString() : (Number.parseInt(this.images[i].posy) -  Number.parseInt(this.images[i].posy) * 0.4).toString();
+    }
+    
+  }
 
   getDimensionOfContainers() {
     setTimeout(() => {
       const div2 = this.elRef.nativeElement.querySelector('.pdfViewer');
       this.widthDocument = div2.clientWidth;
       this.heightDocument = div2.clientHeight;
+      this.ResizeAddedElements();
     }, 1000);
   }
 
@@ -149,6 +162,10 @@ export class DocumentViewerComponent implements OnInit {
   }
 
   printAddElements() {
+    for(let i = 0; i < this.texts.length;i++){
+      const content = this.elRef.nativeElement.querySelector(`textarea[name="key_${i}"]`).value;
+      this.texts[i].content = content;
+    }
     console.log(this.images, 'images');
     console.log(this.texts, 'notes');
     console.log([...this.images, ...this.texts], 'all');
