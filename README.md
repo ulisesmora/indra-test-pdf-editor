@@ -22,9 +22,8 @@ Use scroll to render pdf document.
 
 ## known issues and solutions
 
-- [ ] I need to finish the recalculate function for the position to added elements when the application use a zoom In or Zoom Out or rotation
-- [ ] Make features to add opacity in text 
-- [ ] Fix lossted text when reposition text elements 
+- [ ] finish the recalculate function for the position to added elements when the application use a zoom In or Zoom Out or rotation
+- [ ] finish features to add opacity in text 
 - [ ] I need more time for unit test and application state, adding other types of annotations
 
 ## Development server
